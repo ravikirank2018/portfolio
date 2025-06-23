@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravi Kiran K - SN Developer & Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: -20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: #e7ebf0;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 2rem;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">RK</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#servicenow">ServiceNow</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Ravi Kiran K</h1>
+            <p>ServiceNow Developer & Full Stack Engineer | AI Enthusiast</p>
+            <a href="#contact" class="cta-button">Let's Connect</a>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-grid">
+                    <div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-number">3+</div>
+                                <div>Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">2+</div>
+                                <div>Years Learning</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">5+</div>
+                                <div>Certifications</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <p>I'm a passionate Computer Science Engineering student at GITAM University with a strong focus on full-stack development and artificial intelligence. I love building innovative solutions that solve real-world problems.</p>
+                        <p>Currently pursuing my B.Tech degree (graduating June 2026), I have hands-on experience in developing AI-powered applications, web development, and cybersecurity solutions. I'm particularly interested in leveraging machine learning and modern web technologies to create impactful products.</p>
+                        <p>As an active open-source contributor and certified ServiceNow developer, I'm always eager to learn new technologies and collaborate on exciting projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicenow" class="section" style="background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%); color: white;">
+            <div class="container">
+                <h2 style="color: white;">ServiceNow Expertise</h2>
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Certified ServiceNow Developer with expertise in platform administration and application development</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                        <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                    <span style="font-size: 1.5rem; color: #4CAF50;">🎯</span>
+                                </div>
+                                <div>
+                                    <h3 style="margin: 0; font-size: 1.3rem;">Certified System Administrator (CSA)</h3>
+                                    <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">Platform Administration & Configuration</p>
+                                </div>
+                            </div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ User Management & Access Controls</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ Workflow Administration</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ Data Management & Import Sets</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ Reporting & Dashboard Creation</li>
+                                <li style="padding: 0.5rem 0;">✓ Platform Security & Performance</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                    <span style="font-size: 1.5rem; color: #4CAF50;">⚡</span>
+                                </div>
+                                <div>
+                                    <h3 style="margin: 0; font-size: 1.3rem;">Certified Application Developer (CAD)</h3>
+                                    <p style="margin: 0; opacity: 0.8; font-size: 0.9rem;">Custom Application Development</p>
+                                </div>
+                            </div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ Custom Application Architecture</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ Server-side & Client-side Scripting</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ UI Policy & Business Rules</li>
+                                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">✓ REST/SOAP Web Services</li>
+                                <li style="padding: 0.5rem 0;">✓ Integration & Third-party APIs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                            <h4 style="margin: 0 0 0.5rem 0;">Platform Skills</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">ITSM, ITOM, HR Service Delivery</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                            <h4 style="margin: 0 0 0.5rem 0;">Development</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">JavaScript, GlideScript, Forms</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔗</div>
+                            <h4 style="margin: 0 0 0.5rem 0;">Integration</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">REST APIs, MID Server, CMDB</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+                            <h4 style="margin: 0 0 0.5rem 0;">Security & Control</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">Access Control, Source Control</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section" style="background: #f8f9ff;">
+            <div class="container">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Web Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AI & Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">YOLOv8</span>
+                            <span class="skill-tag">ML Models</span>
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">Computer Vision</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Databases & Cloud</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Supabase</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Vercel</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools & Platforms</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag">ServiceNow</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Tkinter</span>
+                            <span class="skill-tag">Dash</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Concepts</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">DSA</span>
+                            <span class="skill-tag">OOP</span>
+                            <span class="skill-tag">SDLC</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">Cybersecurity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Cyhack</div>
+                            <p>Real-time Cyber Incident Monitoring System</p>
+                        </div>
+                        <div class="project-content">
+                            <p>Developed a comprehensive cybersecurity monitoring platform with live threat prediction capabilities. Features AI-powered threat detection and interactive dashboards for real-time incident visualization and reporting.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">AI Models</span>
+                                <span class="tech-tag">Dash</span>
+                                <span class="tech-tag">Real-time Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">CheatShield AI</div>
+                            <p>AI-Based Exam Surveillance System</p>
+                        </div>
+                        <div class="project-content">
+                            <p>Built an intelligent proctoring system that detects cheating behaviors through video analysis. Achieved 85% accuracy in detecting suspicious activities using advanced computer vision techniques.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">YOLOv8</span>
+                                <span class="tech-tag">Tkinter</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Course Compass AI</div>
+                            <p>Personalized Learning Navigator</p>
+                        </div>
+                        <div class="project-content">
+                            <p>Created an AI-driven platform that recommends personalized learning paths. Features real-time updates, secure authentication, and modern responsive design deployed on Vercel.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Supabase</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section" style="background: #f8f9ff;">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-title">Open-Source Contributor</div>
+                        <div class="experience-company">Cloud-CV EvalAI</div>
+                        <div class="experience-date">2025 – Present | Remote</div>
+                        <ul>
+                            <li>Enhanced user interface with improved error handling for invalid URL inputs</li>
+                            <li>Contributed to large-scale AI challenge hosting platform</li>
+                            <li>Collaborated with global development team using CI/CD pipelines</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-title">AI-ML Intern</div>
+                        <div class="experience-company">EDUSKILLS</div>
+                        <div class="experience-date">Sep 2023 – Nov 2023 | Remote</div>
+                        <ul>
+                            <li>Developed and deployed machine learning models on real datasets</li>
+                            <li>Preprocessed and analyzed large datasets to improve model performance</li>
+                            <li>Collaborated with cross-functional teams on AI algorithm implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="section">
+            <div class="container">
+                <h2>Achievements & Certifications</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <h3>ServiceNow CSA</h3>
+                        <p>Certified System Administrator</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3>ServiceNow CAD</h3>
+                        <p>Certified Application Developer</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3>HackerRank Gold</h3>
+                        <p>Problem Solving Certification</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3>Top 20 Team</h3>
+                        <p>Internal Hackathon (150 teams)</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3>Campus Ambassador</h3>
+                        <p>RineX - Gitam University</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section" style="background: #f8f9ff;">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <a href="mailto:rkiran@gitam.in" class="contact-link">rkiran@gitam.in</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <h3>Phone</h3>
+                        <a href="tel:+918217800894" class="contact-link">+91 8217800894</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <h3>LinkedIn</h3>
+                        <a href="https://linkedin.com/in/ravikiran-k-54940125b" class="contact-link" target="_blank">Connect with me</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🐙</div>
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/ravikirank2018" class="contact-link" target="_blank">View my code</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Dynamic typing effect for hero section
+        const heroText = document.querySelector('.hero p');
+        const texts = [
+            'ServiceNow Developer & Full Stack Engineer | AI Enthusiast',
+            'CSA & CAD Certified | Enterprise Solutions Specialist',
+            'Machine Learning & Computer Vision Developer'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                heroText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                heroText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => { isDeleting = true; }, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+            }
+
+            setTimeout(typeEffect, isDeleting ? 50 : 100);
+        }
+
+        // Start typing effect after page load
+        setTimeout(typeEffect, 1000);
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
