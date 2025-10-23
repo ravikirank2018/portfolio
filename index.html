@@ -1,432 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RaviKiran K - Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Animated background particles */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-100px) translateX(50px); }
-            50% { transform: translateY(-200px) translateX(-50px); }
-            75% { transform: translateY(-100px) translateX(100px); }
-        }
-
-        /* Header */
-        header {
-            padding: 2rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            animation: slideDown 1s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .contact-links a:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Main content */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s;
-        }
-
-        section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #feca57;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57);
-            animation: underlineGrow 2s ease forwards;
-        }
-
-        @keyframes underlineGrow {
-            to { width: 100%; }
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .skill-card:hover {
-            border-color: #feca57;
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .skill-card h3 {
-            color: #48dbfb;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Projects */
-        .project-card {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(254, 202, 87, 0.2));
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #ff6b6b;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateX(10px);
-            box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-card h3 {
-            color: #feca57;
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .project-tech {
-            color: #48dbfb;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        /* Experience */
-        .experience-item {
-            background: linear-gradient(135deg, rgba(72, 219, 251, 0.2), rgba(118, 75, 162, 0.2));
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #48dbfb;
-        }
-
-        .experience-item h3 {
-            color: #ff9ff3;
-            margin-bottom: 0.5rem;
-        }
-
-        .date {
-            color: #feca57;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Achievements */
-        .achievement-list {
-            list-style: none;
-        }
-
-        .achievement-list li {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            border-left: 4px solid #ff6b6b;
-            animation: slideInLeft 0.5s ease;
-            animation-fill-mode: both;
-        }
-
-        .achievement-list li:nth-child(1) { animation-delay: 0.1s; }
-        .achievement-list li:nth-child(2) { animation-delay: 0.2s; }
-        .achievement-list li:nth-child(3) { animation-delay: 0.3s; }
-        .achievement-list li:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes slideInLeft {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Education */
-        .education {
-            background: linear-gradient(135deg, rgba(255, 159, 243, 0.2), rgba(254, 202, 87, 0.2));
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 5px solid #ff9ff3;
-        }
-
-        .education h3 {
-            color: #48dbfb;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Pulse animation for important elements */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .pulse {
-            animation: pulse 2s ease infinite;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            .contact-links { flex-direction: column; gap: 1rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaviKiran K - Portfolio</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="bg-animation" id="particles"></div>
+  <div id="root"></div>
+  
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const Github = ({ className }) => <svg className={className} fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>;
+    const Linkedin = ({ className }) => <svg className={className} fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>;
+    const Mail = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+    const Phone = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>;
+    const ExternalLink = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>;
+    const Code = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>;
+    const Briefcase = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+    const Award = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>;
+    const GraduationCap = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z M12 14l9-5" /></svg>;
 
-    <header>
-        <h1>RaviKiran K</h1>
-        <p style="font-size: 1.2rem; margin-top: 0.5rem;">Computer Science Engineer | Full-Stack Developer | AI/ML Enthusiast</p>
-        <div class="contact-links">
-            <a href="tel:8217800894">📞 8217800894</a>
-            <a href="mailto:rkiran@gitam.in">✉️ rkiran@gitam.in</a>
-            <a href="https://linkedin.com/in/ravikiran-k-54940125b" target="_blank">💼 LinkedIn</a>
-            <a href="https://github.com/ravikirank2018" target="_blank">💻 GitHub</a>
+    function Portfolio() {
+      const [isVisible, setIsVisible] = useState({});
+
+      useEffect(() => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              setIsVisible((prev) => ({
+                ...prev,
+                [entry.target.id]: entry.isIntersecting,
+              }));
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('section[id]').forEach((section) => {
+          observer.observe(section);
+        });
+
+        return () => observer.disconnect();
+      }, []);
+
+      const skills = {
+        languages: ['JavaScript', 'Java', 'Python', 'C'],
+        frameworks: ['React', 'Node.js', 'Django'],
+        tools: ['Git', 'GitHub', 'VS Code', 'Firebase', 'ServiceNow', 'Docker', 'Linux'],
+        databases: ['SQL', 'NoSQL', 'SQLite'],
+        cloud: ['Google Gemini API', 'OpenAI API', 'Firebase Cloud', 'REST APIs', 'Azure', 'AWS'],
+      };
+
+      const projects = [
+        {
+          title: 'Adaptively',
+          tech: 'Google Gemini API, MediaPipe, Firebase, JavaScript',
+          description: 'AI-powered adaptive learning platform for visually and hearing-impaired students',
+          highlights: [
+            'Integrated Google Gemini API for real-time voice navigation',
+            'MediaPipe sign language recognition for inclusive learning',
+            'Reinforcement learning-based adaptive content delivery',
+            'Deployed on Vercel with multi-language support',
+          ],
+        },
+        {
+          title: 'DeepVision',
+          tech: 'Python, PyTorch, CNN (ResNet), LSTM',
+          description: 'AI system for video captioning and event recognition',
+          highlights: [
+            'ResNet CNN for feature extraction and LSTM for sequence modeling',
+            '92% accuracy on benchmark datasets',
+            'End-to-end pipeline with preprocessing and model training',
+          ],
+        },
+        {
+          title: 'TaskMate',
+          tech: 'React.js, Node.js, Express.js, MongoDB, Firebase',
+          description: 'Productivity tracking application with dynamic dashboards',
+          highlights: [
+            'React.js frontend with interactive charts',
+            'REST APIs with Node.js/Express.js',
+            'Firebase authentication and push notifications',
+          ],
+        },
+      ];
+
+      const achievements = [
+        'ServiceNow Certified System Administrator (CSA)',
+        'ServiceNow Certified Application Developer (CAD)',
+        'Campus Ambassador, RineX - Gitam University',
+        'Google Hackathon AI Challenge - Certificate of Achievement',
+      ];
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+          <div className="fixed inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" style={{ top: '10%', left: '10%' }}></div>
+            <div className="absolute w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" style={{ top: '50%', right: '10%' }}></div>
+            <div className="absolute w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" style={{ bottom: '10%', left: '50%' }}></div>
+          </div>
+
+          <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-purple-500/20">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                RK
+              </div>
+              <div className="flex gap-6">
+                {['About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="hover:text-purple-400 transition-colors duration-300"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </nav>
+
+          <section id="hero" className="min-h-screen flex items-center justify-center relative px-6 pt-20">
+            <div className="max-w-4xl text-center space-y-8 animate-fade-in">
+              <h1 className="text-6xl md:text-8xl font-bold mb-4 animate-slide-up">
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  RaviKiran K
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 animate-slide-up animation-delay-200">
+                Computer Science Engineer | Full Stack Developer | AI Enthusiast
+              </p>
+              <p className="text-lg text-gray-400 animate-slide-up animation-delay-400">
+                Google Summer of Code 2025 Contributor | ServiceNow Certified Developer
+              </p>
+              <div className="flex gap-6 justify-center animate-slide-up animation-delay-600">
+                <a href="https://github.com/ravikirank2018" target="_blank" rel="noopener noreferrer" className="p-3 bg-purple-500/20 rounded-full hover:bg-purple-500/40 transition-all duration-300 hover:scale-110">
+                  <Github className="w-6 h-6" />
+                </a>
+                <a href="https://linkedin.com/in/ravikiran-k-54940125b" target="_blank" rel="noopener noreferrer" className="p-3 bg-purple-500/20 rounded-full hover:bg-purple-500/40 transition-all duration-300 hover:scale-110">
+                  <Linkedin className="w-6 h-6" />
+                </a>
+                <a href="mailto:rkiran@gitam.in" className="p-3 bg-purple-500/20 rounded-full hover:bg-purple-500/40 transition-all duration-300 hover:scale-110">
+                  <Mail className="w-6 h-6" />
+                </a>
+                <a href="tel:8217800894" className="p-3 bg-purple-500/20 rounded-full hover:bg-purple-500/40 transition-all duration-300 hover:scale-110">
+                  <Phone className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-4xl transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="flex items-center gap-3 mb-8">
+                <GraduationCap className="w-8 h-8 text-purple-400" />
+                <h2 className="text-4xl font-bold">Education</h2>
+              </div>
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:transform hover:scale-105">
+                <h3 className="text-2xl font-bold mb-2">Gandhi Institute of Technology and Management (GITAM)</h3>
+                <p className="text-purple-400 mb-2">B.Tech in Computer Science and Engineering</p>
+                <p className="text-gray-400">Bangalore, Karnataka | Expected June 2026</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="experience" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-4xl w-full transition-all duration-1000 ${isVisible.experience ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="flex items-center gap-3 mb-8">
+                <Briefcase className="w-8 h-8 text-purple-400" />
+                <h2 className="text-4xl font-bold">Experience</h2>
+              </div>
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold">Google Summer of Code Contributor</h3>
+                    <p className="text-purple-400">CloudCV</p>
+                  </div>
+                  <span className="text-gray-400">June 2025 - Present</span>
+                </div>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex gap-3">
+                    <span className="text-purple-400 mt-1">▹</span>
+                    <span>Contributing under GSoC 2025 with CloudCV to enhance EvalAI's test suite and user experience</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-purple-400 mt-1">▹</span>
+                    <span>Developed additional Django test cases, boosting backend coverage by 35%</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-purple-400 mt-1">▹</span>
+                    <span>Improved AngularJS components and frontend forms for validation and error handling</span>
+                  </li>
+                </ul>
+                <a href="https://github.com/ravikirank2018/GSoC-Ideas" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4 text-purple-400 hover:text-purple-300 transition-colors">
+                  View Contributions <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-6xl w-full transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="flex items-center gap-3 mb-8">
+                <Code className="w-8 h-8 text-purple-400" />
+                <h2 className="text-4xl font-bold">Projects</h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projects.map((project, index) => (
+                  <div
+                    key={index}
+                    className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:transform hover:scale-105"
+                  >
+                    <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-sm text-purple-400 mb-3">{project.tech}</p>
+                    <p className="text-gray-300 mb-4">{project.description}</p>
+                    <ul className="space-y-2">
+                      {project.highlights.map((highlight, i) => (
+                        <li key={i} className="flex gap-2 text-sm text-gray-400">
+                          <span className="text-purple-400 mt-1">•</span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="skills" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-6xl w-full transition-all duration-1000 ${isVisible.skills ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <h2 className="text-4xl font-bold mb-12 text-center">Technical Skills</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Object.entries(skills).map(([category, items]) => (
+                  <div
+                    key={category}
+                    className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
+                  >
+                    <h3 className="text-xl font-bold mb-4 capitalize text-purple-400">{category}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map((skill, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-purple-500/20 rounded-full text-sm hover:bg-purple-500/40 transition-colors duration-300"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="achievements" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-4xl w-full transition-all duration-1000 ${isVisible.achievements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="flex items-center gap-3 mb-8">
+                <Award className="w-8 h-8 text-purple-400" />
+                <h2 className="text-4xl font-bold">Achievements & Certifications</h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {achievements.map((achievement, index) => (
+                  <div
+                    key={index}
+                    className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:transform hover:scale-105"
+                  >
+                    <p className="text-lg">{achievement}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div className={`max-w-4xl w-full text-center transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <h2 className="text-4xl font-bold mb-8">Get In Touch</h2>
+              <p className="text-xl text-gray-300 mb-8">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+              </p>
+              <div className="flex flex-col items-center gap-4">
+                <a href="mailto:rkiran@gitam.in" className="text-2xl text-purple-400 hover:text-purple-300 transition-colors">
+                  rkiran@gitam.in
+                </a>
+                <a href="tel:8217800894" className="text-2xl text-purple-400 hover:text-purple-300 transition-colors">
+                  +91 8217800894
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <footer className="py-8 text-center text-gray-400 border-t border-purple-500/20">
+            <p>Designed & Built by RaviKiran K</p>
+          </footer>
+
+          <style>{`
+            @keyframes blob {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              25% { transform: translate(20px, -50px) scale(1.1); }
+              50% { transform: translate(-20px, 20px) scale(0.9); }
+              75% { transform: translate(50px, 50px) scale(1.05); }
+            }
+            
+            .animate-blob {
+              animation: blob 7s infinite;
+            }
+            
+            .animation-delay-2000 {
+              animation-delay: 2s;
+            }
+            
+            .animation-delay-4000 {
+              animation-delay: 4s;
+            }
+            
+            @keyframes fade-in {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            
+            .animate-fade-in {
+              animation: fade-in 1s ease-out;
+            }
+            
+            @keyframes slide-up {
+              from {
+                opacity: 0;
+                transform: translateY(30px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            
+            .animate-slide-up {
+              animation: slide-up 0.8s ease-out forwards;
+              opacity: 0;
+            }
+            
+            .animation-delay-200 {
+              animation-delay: 0.2s;
+            }
+            
+            .animation-delay-400 {
+              animation-delay: 0.4s;
+            }
+            
+            .animation-delay-600 {
+              animation-delay: 0.6s;
+            }
+            
+            html {
+              scroll-behavior: smooth;
+            }
+          `}</style>
         </div>
-    </header>
+      );
+    }
 
-    <main>
-        <section>
-            <h2>👨‍💻 Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Languages</h3>
-                    <p>JavaScript, Java, Python, C</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Frameworks & Libraries</h3>
-                    <p>React, Node.js, Django</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Tools & Platforms</h3>
-                    <p>Git, GitHub, VS Code, Firebase, ServiceNow, Docker, Linux</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Databases</h3>
-                    <p>SQL, NoSQL, SQLite</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Cloud & APIs</h3>
-                    <p>Google Gemini API, OpenAI API, Firebase Cloud, REST APIs, Azure, AWS</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Core Concepts</h3>
-                    <p>DSA, Cloud Computing, API Development, SDLC, AGILE, AI, ML, DL</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>💼 Experience</h2>
-            <div class="experience-item pulse">
-                <h3>Google Summer of Code Contributor</h3>
-                <div class="date">June 2025 – Present | CloudCV (Remote)</div>
-                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                    <li>Contributing under GSoC 2025 with CloudCV to enhance EvalAI's test suite and user experience</li>
-                    <li>Developed additional Django test cases, boosting backend coverage by 35%</li>
-                    <li>Improved AngularJS components and frontend forms for validation and error handling</li>
-                    <li>Open-source contributions: <a href="https://github.com/ravikirank2018/GSoC-Ideas" style="color: #feca57;">github.com/ravikirank2018/GSoC-Ideas</a></li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>🚀 Projects</h2>
-            <div class="project-card">
-                <h3>Adaptively</h3>
-                <div class="project-tech">Google Gemini API | MediaPipe | Firebase | JavaScript</div>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Built an AI-powered adaptive learning platform for visually and hearing-impaired students</li>
-                    <li>Integrated Google Gemini API for real-time voice navigation and MediaPipe sign language recognition</li>
-                    <li>Implemented reinforcement learning-based adaptive content delivery and AI-generated educational videos</li>
-                    <li>Deployed working prototype on Vercel with multi-language support and gamified learning modules</li>
-                </ul>
-            </div>
-
-            <div class="project-card">
-                <h3>DeepVision</h3>
-                <div class="project-tech">Python | PyTorch | CNN (ResNet) | LSTM</div>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Developed AI system for video captioning and event recognition using ResNet CNN and LSTM</li>
-                    <li>Achieved 92% accuracy on benchmark datasets for video frame classification</li>
-                    <li>Implemented end-to-end pipeline including data preprocessing, augmentation, training, and evaluation</li>
-                </ul>
-            </div>
-
-            <div class="project-card">
-                <h3>TaskMate</h3>
-                <div class="project-tech">React.js | Node.js | Express.js | MongoDB | Firebase</div>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Designed React.js frontend with dashboards and interactive charts for productivity tracking</li>
-                    <li>Implemented REST APIs with Node.js/Express.js and integrated Firebase for authentication</li>
-                    <li>Built intuitive UI with dynamic dashboards and push notifications</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>🎓 Education</h2>
-            <div class="education">
-                <h3>Gandhi Institute of Technology and Management (GITAM)</h3>
-                <div class="date">Expected Graduation: June 2026</div>
-                <p style="margin-top: 0.5rem;">B.Tech in Computer Science and Engineering</p>
-                <p>Bangalore, Karnataka</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>🏆 Achievements & Certifications</h2>
-            <ul class="achievement-list">
-                <li><strong>ServiceNow Certified System Administrator (CSA)</strong></li>
-                <li><strong>ServiceNow Certified Application Developer (CAD)</strong></li>
-                <li><strong>Campus Ambassador, RineX – Gitam University:</strong> Conducted workshops for 500+ students</li>
-                <li><strong>Google Hackathon AI Challenge:</strong> Certificate of Achievement</li>
-            </ul>
-        </section>
-    </main>
-
-    <script>
-        // Create animated particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 50 + 20 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-            particlesContainer.appendChild(particle);
-        }
-
-        // Smooth scroll animation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add intersection observer for animation on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease';
-                }
-            });
-        });
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+    ReactDOM.render(<Portfolio />, document.getElementById('root'));
+  </script>
 </body>
 </html>
